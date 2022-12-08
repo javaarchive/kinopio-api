@@ -1,8 +1,39 @@
 import {KinopioStructure} from "./structure.js";
 
 export class User extends KinopioStructure {
+    url: string;
+    name: string;
+    emailIsVerified: boolean = false;
+    cardsCreatedCount: number = 0;
+    description: string;
+    website: string;
+
+    color: string;
+
+    contrallable: boolean = false; // can be controlled by this client. 
+
     async fetchSelf(){
-        let data = await this.client.fetch("/user");
-        console.log(JSON.stringify(data,null,4));
+        let data: any = await this.client.fetch("/user");
+        // console.log(JSON.stringify(data,null,4));
+        this.url = data.url;
+        this.id = data.id;
+        this.name = data.name;
+        this.emailIsVerified == data.emailIsVerified;
+        this.color = data.color;
+        this.cardsCreatedCount = data.cardsCreatedCount;
+        this.description = data.description;
+        this.website = data.website;
+        this.contrallable = true;
+    }
+
+    async syncSelf(){
+
+    }
+
+    async sync(){
+        if(!this.contrallable){
+            throw new Error("User is not contrallable. ");
+        }
+        await this.syncSelf();
     }
 }
