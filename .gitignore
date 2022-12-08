@@ -74,3 +74,6 @@ typings/
 
 # FuseBox cache
 .fusebox/
+
+# I'm thinking of suppressing this being commited to git for now
+build

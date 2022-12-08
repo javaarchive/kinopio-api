@@ -3,6 +3,9 @@ import https from 'node:https';
 
 import fetch from "node-fetch";
 
+import {User} from "./user.js";
+
+
 interface KinopioClientOptions {
     /**
      * The Kinopio API key to use for requests. You can find this on your account settings. 
@@ -28,6 +31,8 @@ class KinopioClient {
     apiUrl = "https://api.kinopio.club"
     wsHost = "kinopio-server.herokuapp.com"
     options: KinopioClientOptions;
+
+    user: User;
 
     constructor(options: KinopioClientOptions){
         if(!options.apiKey){
@@ -56,9 +61,33 @@ class KinopioClient {
                 continue;
             }
             if(!options.raw){
-                return (await resp.text());
+                return (await resp.json());
             }
             return resp;
         }
+        
     }
+
+    async getUser(){
+        let user = new User();
+        user.setClient(this);
+        await user.fetchSelf();
+        return user;
+    }
+
+    
+
+    /**
+     * Not needed but preloads a lot of data to be accessed as attributes. 
+     */
+    async initalize(){
+        this.user = await this.getUser();
+    }
+
 }
+
+export default KinopioClient;
+
+export {User};
+
+export {KinopioClient, KinopioClientOptions};
