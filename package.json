@@ -1,0 +1,57 @@
+{
+  "name": "kinop.io",
+  "version": "0.0.1",
+  "description": "A library of accessing https://kinopio.club  ",
+  "type": "module",
+  "engines": {
+    "node": ">= 14.0 <17"
+  },
+  "devDependencies": {
+    "@types/jest": "~27.5",
+    "@types/node": "~16",
+    "@typescript-eslint/eslint-plugin": "~5.26",
+    "@typescript-eslint/parser": "~5.26",
+    "eslint": "~8.16",
+    "eslint-config-prettier": "~8.5",
+    "eslint-plugin-jest": "~26.2",
+    "jest": "~28.1",
+    "prettier": "~2.6",
+    "rimraf": "~3.0",
+    "ts-jest": "~28.0",
+    "tsutils": "~3.21",
+    "typescript": "~4.7"
+  },
+  "bin": "./build/src/main.js",
+  "scripts": {
+    "start": "node build/src/main.js",
+    "clean": "rimraf coverage build tmp",
+    "prebuild": "npm run lint",
+    "build": "tsc -p tsconfig.json",
+    "build:watch": "tsc -w -p tsconfig.json",
+    "build:release": "npm run clean && tsc -p tsconfig.release.json",
+    "lint": "eslint . --ext .ts --ext .mts || echo Linter not installed",
+    "test": "echo Tests have not been added yet",
+    "prettier": "prettier --config .prettierrc --write .",
+    "test:watch": "echo No impl"
+  },
+  "repository": "github:javaarchive/Xenocrates",
+  "homepage": "https://github.com/javaarchive/kinopio-api",
+  "author": "Raymond <javaarchive@users.noreply.github.com>",
+  "license": "GPL",
+  "dependencies": {
+    "node-fetch": "^3.3.0",
+    "tslib": "~2.4"
+  },
+  "volta": {
+    "node": "16.13.0"
+  },
+  "keywords": [
+    "search",
+    "typesense"
+  ],
+  "funding": {
+    "type": "buymeacoffee",
+    "url": "https://www.buymeacoffee.com/semidev"
+  },
+  "main": "build/src/main.js"
+}
