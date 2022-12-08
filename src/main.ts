@@ -14,7 +14,6 @@ interface KinopioClientOptions {
     https_agent?: https.AgentOptions;
     
     ratelimit_wait_time?: number;
-    
 }
 
 function wait(ms: number): Promise<void>{
@@ -39,7 +38,7 @@ class KinopioClient {
         this.options = options;
     }
 
-    async fetch(url: string, method = "GET", options = {}){
+    async fetch(url: string, method = "GET", options: any = {}){
         for(let i = 0; i < 10; i ++){
             let final_url = url;
             if(!url.startsWith("https://")){
@@ -55,6 +54,9 @@ class KinopioClient {
             if(resp.status == 429){
                 await wait(this.options.ratelimit_wait_time || (30 * 1000));
                 continue;
+            }
+            if(!options.raw){
+                return (await resp.text());
             }
             return resp;
         }
