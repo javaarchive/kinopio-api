@@ -12,9 +12,7 @@ export class User extends KinopioStructure {
 
     contrallable: boolean = false; // can be controlled by this client. 
 
-    async fetchSelf(){
-        let data: any = await this.client.fetch("/user");
-        // console.log(JSON.stringify(data,null,4));
+    loadJson(data: any){
         this.url = data.url;
         this.id = data.id;
         this.name = data.name;
@@ -26,8 +24,14 @@ export class User extends KinopioStructure {
         this.contrallable = true;
     }
 
-    async syncSelf(){
+    async fetchSelf(){
+        let data: any = await this.client.fetch("/user");
+        // console.log(JSON.stringify(data,null,4));
+        this.loadJson(data);
+    }
 
+    async syncSelf(){
+                
     }
 
     async sync(){
