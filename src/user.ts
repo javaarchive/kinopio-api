@@ -10,7 +10,7 @@ export class User extends KinopioStructure {
 
     color: string;
 
-    contrallable: boolean = false; // can be controlled by this client. 
+    controllable: boolean = false; // can be controlled by this client. 
 
     loadJson(data: any){
         this.url = data.url;
@@ -21,7 +21,7 @@ export class User extends KinopioStructure {
         this.cardsCreatedCount = data.cardsCreatedCount;
         this.description = data.description;
         this.website = data.website;
-        this.contrallable = true;
+        this.controllable = true;
     }
 
     async fetchSelf(){
@@ -35,7 +35,7 @@ export class User extends KinopioStructure {
     }
 
     async sync(){
-        if(!this.contrallable){
+        if(!this.controllable){
             throw new Error("User is not contrallable. ");
         }
         await this.syncSelf();
